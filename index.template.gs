@@ -1,0 +1,9 @@
+function startVacationReminder() {
+  app.start({
+    TRACKER_DOC_ID: 'UPDATE_HERE',
+    TRACKER_SHEET_NAME: 'UPDATE_HERE',
+    COMMON_CALENDAR_ID: 'UPDATE_HERE',
+    SLACK_TOKEN: 'UPDATE_HERE',
+    HOLIDAY_CAL_ID: 'UPDATE_HERE'
+  })
+}

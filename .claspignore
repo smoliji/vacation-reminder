@@ -1,0 +1,5 @@
+**/**
+
+!dist/app.js
+!appsscript.json
+!index.gs
