@@ -23,15 +23,8 @@ export class Reminder {
   }
 
   public getVacationsGroups() {
-    const users: Email[] = []
-    this.vacations.forEach((x) => {
-      const existing = users.find((u) => u.equals(x.getEmail()))
-      if (!existing) {
-        users.push(x.getEmail())
-      }
-    })
     const groups: Array<[email: Email, days: ReminderDay[]]> = []
-    for (const user of users) {
+    for (const user of this.timeline.users) {
       groups.push([
         user,
         this.createDays(
@@ -146,4 +139,5 @@ export interface Timeline {
   d0: Day
   size: number
   holidays: Day[]
+  users: Email[]
 }

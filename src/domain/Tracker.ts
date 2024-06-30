@@ -34,6 +34,10 @@ export class Tracker {
     return this.subscribers
   }
 
+  public getSubjects() {
+    return this.subjects
+  }
+
   public setCalendarEvents(events: TrackerEvent[]) {
     this.calendar.setEvents(events)
   }

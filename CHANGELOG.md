@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Architecture diagram
 
+### Fixed
+- Slack notification is based on tracker subjects rather than existing vacations
+
 ## [1.0.0.] - 2024-06-22
 
 ### Added

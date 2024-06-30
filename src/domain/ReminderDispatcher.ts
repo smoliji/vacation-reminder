@@ -36,6 +36,7 @@ export class ReminderDispatcher {
       size: ReminderDispatcher.TIMELINE_LENGTH,
       d0: new Day(),
       holidays: this.holidays.getDays().map((x) => new Day(x)),
+      users: tracker.getSubjects(),
     })
   }
 

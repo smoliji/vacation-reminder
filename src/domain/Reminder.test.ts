@@ -13,7 +13,12 @@ describe('Reminder', () => {
         new Vacation(day('2024-01-04'), new Email('a@example.com')),
       ],
       new Subscriber(),
-      { d0: day('2024-01-01'), size: 7, holidays: [day('2024-1-05')] }
+      {
+        d0: day('2024-01-01'),
+        size: 7,
+        holidays: [day('2024-1-05')],
+        users: [new Email('a@example.com')],
+      }
     )
     groupsEqual(rem.getVacationsGroups(), [
       [
@@ -30,7 +35,7 @@ describe('Reminder', () => {
       ],
     ])
   })
-  test('Weekend > Holiday > Vacation > Workday', () => {
+  test('getVacationsGroups day type preference is Weekend > Holiday > Vacation > Workday', () => {
     const SATURDAY = day('2024-01-06')
     const FRIDAY = day('2024-01-05')
     equal(getType(SATURDAY, [SATURDAY], []), ReminderDayType.Weekend)
@@ -44,9 +49,28 @@ describe('Reminder', () => {
         'test',
         vacations.map((x) => new Vacation(x, new Email('a@example.com'))),
         new Subscriber(),
-        { d0: day, size: 7, holidays }
+        { d0: day, size: 7, holidays, users: [new Email('a@example.com')] }
       ).getVacationsGroups()[0]?.[1][0].type
     }
+  })
+  test('getVacationGroups creates groups for input emails', () => {
+    groupsEqual(
+      new Reminder('test', [], new Subscriber(), {
+        d0: day('2024-01-01'),
+        size: 0,
+        holidays: [],
+        users: [
+          new Email('a@example.com'),
+          new Email('b@example.com'),
+          new Email('c@example.com'),
+        ],
+      }).getVacationsGroups(),
+      [
+        ['a@example.com', []],
+        ['b@example.com', []],
+        ['c@example.com', []],
+      ]
+    )
   })
 })
 
