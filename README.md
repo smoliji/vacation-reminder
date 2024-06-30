@@ -13,12 +13,15 @@ Receive Slack notifications for upcoming vacations in your team!
 
 Example message:
 ```
-See the 14-day vacation overview for `Acme project`
-▼ Today
-🌞🌞🗓🗓🗓🗓🌴🌞🌞🇨🇿🗓🌴🌴🗓 —alice@example.com
-🌞🌞🌴🗓🗓🗓🗓🌞🌞🇨🇿🗓🗓🗓🗓 —bob@example.com
-🌞🌞🗓🗓🗓🗓🗓🌞🌞🇨🇿🗓🗓🗓🗓 —carol@example.com
-🌞🌞🗓🗓🗓🗓🗓🌞🌞🇨🇿🗓🗓🗓🗓 —dave@example.com
+📅 Upcoming *Project* vacations for the next 14 days
+Week 26 (24.6.2024)
+ • 🌴 Alice — 1 day
+ • 🌴 Bob — 1 day
+ • No vacations for Carol, Dave
+Week 27 (1.7.2024)
+ • 🇨🇿 2 national holidays
+ • 🌴 Alice — 3 days
+ • No vacations for Carol, Dave
 ```
 
 

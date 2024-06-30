@@ -24,9 +24,60 @@ describe('SlackReminder', () => {
       }
     ).getMessage()
     deepEqual(message, {
-      text: `See the 7-day vacation overview for \`test\`
-▼ Today
-🌴🗓🗓🗓🗓🌞🌞 —a@example.com
+      text: `📅 Upcoming *test* vacations for the next 7 days
+Week 1 (1.1.2024)
+ • 🌴 a@example.com — 1 days
+
+`,
+    })
+  })
+  test('Message contains sections of "weeks", stating information about vacations and group info about those who has no vacations', () => {
+    const message = new SlackReminder(
+      'test',
+      [
+        new Vacation(
+          new Day(new Date('2024-01-01')),
+          new Email('a@example.com')
+        ),
+        new Vacation(
+          new Day(new Date('2024-01-02')),
+          new Email('a@example.com')
+        ),
+        new Vacation(
+          new Day(new Date('2024-01-01')),
+          new Email('b@example.com')
+        ),
+        new Vacation(
+          new Day(new Date('2024-01-09')),
+          new Email('b@example.com')
+        ),
+      ],
+      new SlackSubscriber('john'),
+      {
+        d0: new Day(new Date('2024-01-01')),
+        size: 14,
+        holidays: [
+          new Day(new Date('2024-01-01')),
+        ],
+        users: [
+          new Email('a@example.com'),
+          new Email('b@example.com'),
+          new Email('c@example.com'),
+        ],
+      }
+    ).getMessage()
+    deepEqual(message, {
+      text: `📅 Upcoming *test* vacations for the next 14 days
+Week 1 (1.1.2024)
+ • 🇨🇿 1 national holidays
+ • 🌴 a@example.com — 2 days
+ • 🌴 b@example.com — 1 days
+ • No vacations for c@example.com
+
+Week 2 (8.1.2024)
+ • 🌴 b@example.com — 1 days
+ • No vacations for a@example.com, c@example.com
+
 `,
     })
   })
@@ -38,9 +89,7 @@ describe('SlackReminder', () => {
       users: [],
     }).getMessage()
     deepEqual(message, {
-      text: `See the 7-day vacation overview for \`test\`
-_Tracker has no subjects_
-`,
+      text: 'No subjects',
     })
   })
 })
