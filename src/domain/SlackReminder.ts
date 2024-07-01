@@ -2,8 +2,8 @@ import { Email } from './Email'
 import { Reminder, ReminderDay, ReminderDayType } from './Reminder'
 import { SlackSubscriber } from './SlackSubscriber'
 
-const WORKDAY = '🗓'
-const WEEKEND = '🌞'
+const WORKDAY = '🗓️'
+const WEEKEND = '   '
 const HOLIDAY = '🇨🇿'
 const VACADAY = '🌴'
 
@@ -20,38 +20,50 @@ export interface SlackMessage {
 
 export class SlackReminder extends Reminder {
   public getMessage(): SlackMessage {
-    
-    let text = 'See the $1-day vacation overview for `$2`\n'
-      .replace('$1', String(this.timeline.size))
-      .replace('$2', this.name)
+    const text: string[] = []
+    this.printHeader(text)
 
-    const rows = this.createUserRows()
-    if (rows.length) {
-      text += '▼ Today\n'
-      text += rows.join('\n')
-    } else {
-      text += '_Tracker has no subjects_\n'
-    }
+    this.printUserRows(text)
+
     return {
-      text: text,
+      text: text.join(''),
     }
   }
 
-  protected createUserRows(): string[] {
-    const data = this.getVacationsGroups()
-    return data.map(([user, days]) =>
-      this.createUserRow(user, days)
+  protected printHeader(writer: string[]) {
+    writer.push('*{tracker}*, {size}-day vacations overview, starting {d}.{m}.{yyyy}:\n'
+      .replace('{size}', String(this.timeline.size))
+      .replace('{tracker}', this.name)
+      .replace('{d}', String(this.timeline.d0.getDate().getDate()))
+      .replace('{m}', String(this.timeline.d0.getDate().getMonth() + 1))
+      .replace('{yyyy}', String(this.timeline.d0.getDate().getFullYear()))
     )
   }
 
-  protected createUserRow(user: Email, days: ReminderDay[]): string {
-    let text = ''
-    days.forEach((day) => {
-      const symbol = SYMBOL_MAP[day.type] || WORKDAY
-      text += symbol
+  protected printUserRows(writer: string[]) {
+    if (!this.timeline.users.length) {
+      this.printNoUsers(writer)
+      return
+    }
+    this.getVacationsGroups().forEach(x => {
+      this.printUserRow(writer, x[0], x[1])
     })
-    text += ` —${user.getEmail()}\n`
-    return text
+  }
+
+  protected printNoUsers(writer: string[]) {
+    writer.push('_Tracker has no subjects_\n')
+  }
+
+  protected printUserRow(writer: string[], user: Email, days: ReminderDay[]) {
+    const symbolDays: string[] = []
+    days.forEach(day => {
+      const symbol = SYMBOL_MAP[day.type] || WORKDAY
+      symbolDays.push(symbol)
+    })
+    writer.push('{days} — {email}\n'
+      .replace('{email}', user.getDisplayName())
+      .replace('{days}', symbolDays.join('').trimEnd())
+    )
   }
 
   public getSubscriber(): SlackSubscriber {

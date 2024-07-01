@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Architecture diagram
+- Sample message from Slack screenshot
+
+### Updated
+- Slack notification (no sunny weekends, display names instead of emails, updated header)
 
 ### Fixed
 - Slack notification is based on tracker subjects rather than existing vacations

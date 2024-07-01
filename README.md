@@ -12,15 +12,10 @@ Receive Slack notifications for upcoming vacations in your team!
 
 
 Example message:
-```
-See the 14-day vacation overview for `Acme project`
-▼ Today
-🌞🌞🗓🗓🗓🗓🌴🌞🌞🇨🇿🗓🌴🌴🗓 —alice@example.com
-🌞🌞🌴🗓🗓🗓🗓🌞🌞🇨🇿🗓🗓🗓🗓 —bob@example.com
-🌞🌞🗓🗓🗓🗓🗓🌞🌞🇨🇿🗓🗓🗓🗓 —carol@example.com
-🌞🌞🗓🗓🗓🗓🗓🌞🌞🇨🇿🗓🗓🗓🗓 —dave@example.com
-```
 
+<div align="center">
+<img src="./asset/message_sample.png">
+</div>
 
 
 ## Development

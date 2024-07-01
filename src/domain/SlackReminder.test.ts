@@ -18,15 +18,14 @@ describe('SlackReminder', () => {
       new SlackSubscriber('john'),
       {
         d0: new Day(new Date('2024-01-01')),
-        size: 7,
+        size: 14,
         holidays: [],
         users: [new Email('a@example.com')],
       }
     ).getMessage()
     deepEqual(message, {
-      text: `See the 7-day vacation overview for \`test\`
-▼ Today
-🌴🗓🗓🗓🗓🌞🌞 —a@example.com
+      text: `*test*, 14-day vacations overview, starting 1.1.2024:
+🌴🗓️🗓️🗓️🗓️      🗓️🗓️🗓️🗓️🗓️ — a@example.com
 `,
     })
   })
@@ -38,7 +37,7 @@ describe('SlackReminder', () => {
       users: [],
     }).getMessage()
     deepEqual(message, {
-      text: `See the 7-day vacation overview for \`test\`
+      text: `*test*, 7-day vacations overview, starting 1.1.2024:
 _Tracker has no subjects_
 `,
     })
