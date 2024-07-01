@@ -10,9 +10,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Architecture diagram
 
-### Changed
-- Improve UI of the Slack message (less emoji, more text, group by weeks instead of people)
-
 ### Fixed
 - Slack notification is based on tracker subjects rather than existing vacations
 
