@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Updated
 - Slack notification (no sunny weekends, display names instead of emails, updated header)
+- Event subject is derived from author as a fallback to guest list
 
 ### Fixed
 - Slack notification is based on tracker subjects rather than existing vacations

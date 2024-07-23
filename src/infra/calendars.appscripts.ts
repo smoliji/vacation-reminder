@@ -79,7 +79,7 @@ export function findCalendarEvents(calendar: Calendar): Event[] {
       event.getTitle(),
       event.getDescription(),
       new EmailAddressParser(
-        event.getGuestList()[0]?.getEmail() ?? ''
+        event.getGuestList()[0]?.getEmail() ?? event.getCreators()[0] ?? ''
       ).parseOne(),
       new Time(
         new Date(
